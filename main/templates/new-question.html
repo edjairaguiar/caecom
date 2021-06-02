@@ -1,0 +1,38 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<title>criar novo tópico / cae.com</title>
+<div class="page new-question-page">
+<h1 class="title"> nova pergunta: </h1>
+
+<form method="POST" action="" class="new-question-form">
+    {% csrf_token %}
+
+    <div class="fieldWrapper">
+        <!--titulo-->
+        <label for="{{form.title.id_for_label}}">título:</label>
+        {{form.title}}
+        <span class="error">{{form.title.errors}}</span>
+        <br>
+
+        <!--disciplina-->
+        <label for="{{form.area.id_for_label}}">tipo de disciplina: </label>
+        {{form.area}}
+        <span class="error">{{form.area.errors}}</span>
+        <br> 
+
+        <!--corpo do tópico-->
+        <label for="{{form.body.id_for_label}}">elabore sua pergunta: </label>
+        {{form.body}}
+        <span class="error">{{form.body.errors}}</span>
+        <br>        
+        
+    </div>
+
+    <input type="submit" value="criar tópico" class="submit-button"/>
+
+</form>
+
+</div>
+
+{% endblock %}

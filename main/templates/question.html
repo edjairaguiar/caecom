@@ -1,0 +1,35 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<title>{{question.title}} / cae.com</title>
+<div class="page question-page">
+<h2 class="question-title">{{question.title}}</h2>
+<p class="question-body">{{question.body}}</p>
+<small class="question-author">pergunta feita por <b>{{question.author.username}}</b> em {{question.area}}</small>
+
+<div class="responses-container">
+    <h4 class="responses-container-heading">respostas para essa pergunta:</h4>
+
+    {% if not question.responses.all %}
+        <p class="no-responses-text">ainda não há respostas para essa pergunta</p>
+    {% else %}
+        {% for response in question.get_responses %}
+            {% include 'components/response.html' with response=response%}
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% if user.is_authenticated %}
+<form method="POST" action="" class="response-form">
+    {% csrf_token%}
+    <div class="fieldWrapper">
+        <!--e-mail-->
+        <div class="help-me-response"><label for="{{response_form.body.id_for_label}}">consegue ajudar {{question.author.username}}? responda a essa pergunta!</label></div>
+        {{response_form.body}}
+    </div>
+    <input type="submit" value="enviar resposta" class="submit-button"/>
+</form>
+{% endif %}
+</div>
+
+{% endblock %}

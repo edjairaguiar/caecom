@@ -1,0 +1,34 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+
+<title>página inicial / cae.com</title>
+
+<div class="page">
+<h1 class="title"> perguntas recentes: </h1>
+
+{% for question in questions|slice:":5" %}
+<div class="question-list-item">
+    <!-- exibir questão em cima-->
+    <a href="{% url 'question' question.id %}">
+
+        <!-- nome da questão -->
+        <p class="question-list-item-title">
+            {{question.title}}
+        </p>
+
+        <!-- autor e disciplina -->
+        <p class="question-list-item-author">
+            pergunta feita por {{question.author.username}} em {{question.area}}
+        </p>
+        
+    </a>
+</div>
+
+{% endfor %}
+
+<a href="{% url 'topics' %}"><input type="submit" class="submit-button" value="ver todas"></a>
+
+</div>
+
+{% endblock %}

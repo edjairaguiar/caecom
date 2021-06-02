@@ -1,0 +1,33 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+
+<title>todas as perguntas / cae.com</title>
+<div class="page">
+<h1 class="title"> perguntas: </h1>
+{% for question in questions %}
+
+<div class="question-list-item">
+
+    <!-- exibir questão em cima-->
+    <a href="{% url 'question' question.id %}">
+
+        <!-- nome da questão -->
+        <p class="question-list-item-title">
+            {{question.title}}
+        </p>
+
+        <!-- autor e disciplina -->
+        <p class="question-list-item-author">
+            pergunta feita por {{question.author.username}} em {{question.area}}
+        </p>
+        
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

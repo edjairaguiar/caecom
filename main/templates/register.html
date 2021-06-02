@@ -1,0 +1,59 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<title>solicitar acesso / cae.com</title>
+<div class="page register-page">
+<h1 class="title"> solicitar acesso: </h1>
+
+<form method="POST" action="" class="register-form">
+    {% csrf_token %}
+
+    <div class="fieldWrapper">
+        <!--e-mail-->
+        <label for="{{form.email.id_for_label}}">e-mail:</label>
+        {{form.email}}
+        <span class="error">{{form.email.errors}}</span>
+        <br>
+
+        <!--aluno-->
+        <label for="{{form.username.id_for_label}}">nome: </label>
+        <small class="help-me">evite usar apelidos! </small>
+        {{form.username}}
+        <span class="error">{{form.username.errors}}</span>
+        <br>
+
+        <!--senha1-->
+        <label for="{{form.password1.id_for_label}}">senha:</label>
+        {{form.password1}}
+        <span class="error">{{form.password1.errors}}</span>
+        <br>
+
+        <!--senha2-->
+        <label for="{{form.password2.id_for_label}}">confirmar senha:</label>
+        {{form.password2}}
+        <span class="error">{{form.password2.errors}}</span>
+        <br>
+
+        <!-- <label>comprovante de matrícula: </label>
+        <small class="help-me">formato .pdf, .jpg ou .png</small>
+        <form class="comp" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="myfile">
+        </form>
+        <br> -->
+        
+        
+    </div>
+
+    {% if form.non_field_errors %}
+        <div class="non_form_errors">
+            <span class="error">{{form.non_field_errors.as_ul}}</span>
+        </div>
+    {% endif %}
+    <input type="submit" value="solicitar acesso" class="submit-button"/>
+
+</form>
+
+</div>
+
+{% endblock %}

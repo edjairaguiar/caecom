@@ -1,0 +1,41 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<title>entrar / cae.com</title>
+<div class="page login-page">
+<h1 class="title"> entrar: </h1>
+<small class="help-me2">não está cadastrado? <a href="{% url 'register' %}">solicite acesso</a> ao centro acadêmico</small>
+
+<form method="POST" action="" class="login-form">
+    {% csrf_token %}
+
+    <div class="fieldWrapper">
+        <!--aluno-->
+        <label for="{{form.username.id_for_label}}">nome: </label>
+        {{form.username}}
+        <span class="error">{{form.username.errors}}</span>
+        <br>
+    </div>
+
+    <divd class="fieldWrapper">
+        <!--senha1-->
+        <label for="{{form.password.id_for_label}}">senha:</label>
+        {{form.password}}
+        <span class="error">{{form.password.errors}}</span>
+        <br>
+        
+    </div>
+
+    {% if form.non_field_errors %}
+        <div class="non_form_errors">
+            <span class="error">{{form.non_field_errors.as_ul}}</span>
+        </div>
+    {% endif %}
+
+    <input type="submit" value="entrar" class="submit-button"/>
+
+</form>
+
+</div>
+
+{% endblock %}

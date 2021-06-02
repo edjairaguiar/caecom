@@ -1,0 +1,24 @@
+<blockquote id="{{response.id}}">
+    <p class="response-body">{{response.body}}</p>
+    <small class="response-author">respondido por <i>{{response.user.username}}</i></small>
+
+    {% if user.is_authenticated %}
+        <button class="reply-button" onclick="handleReplyButton('{{response.id}}')"><b>responder</b></button>
+    {% endif %}
+
+    <blockquote id="reply-form-container-{{response.id}}" class="reply-form-container">
+        <form method="POST" action="/reply" class="reply-form">
+            {% csrf_token %}
+            <input type="hidden" name="question" value="{{question.id}}"/>
+            <input type="hidden" name="parent" value="{{response.id}}"/>
+            {{reply_form.body}}
+            <button type="button" class="reply-form-cancel-button" onclick="handleCancelReply('{{response.id}}')">cancelar</button>
+            <input type="submit" class="reply-form-submit-button" value="responder"/>
+        </form>
+    </blockquote>
+
+    {% for children in response.get_responses %}
+        {% include 'components/response.html' with response=children %}
+    {% endfor %}
+
+</blockquote>

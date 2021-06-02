@@ -1,0 +1,19 @@
+<nav class="navbar">
+    <div class="main-menu">
+        <ul>
+            <li><a href="#">enquetes</a></li>
+            <li><a href="{% url 'topics' %}">perguntas</a></li>
+        </ul>
+    </div>
+    <div class="user-menu">
+        <ul>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'new-question' %}">nova pergunta</a></li>
+            <li><a href="{% url 'logout' %}">sair</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">entrar</a></li>
+            <li><a href="{% url 'register' %}">solicitar acesso</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
