@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/72fa56fa-15a8-49d5-8f3d-35976e0afd02/resourceGroups/caecom/providers/Microsoft.Web/sites/caecom",
+    "appService.deploySubpath": "."
+}
