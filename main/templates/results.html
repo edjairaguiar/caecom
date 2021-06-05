@@ -1,0 +1,27 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<title>resultados para {{poll.title}} / cae.com</title>
+<div class="page question-page">
+    <p class="poll-desc">você votou para:</p>
+    <h2 class="question-title">{{poll.title}}</h2>
+    <p class="poll-desc">
+        total atual de votos: {{ poll.total }} votos
+    </p>
+    <div class="results-container">
+        <h4 class="responses-container-heading">resultados:</h4>
+
+        <ul class="list-group">
+            <li class="list-group-item">{{ poll.option_one }} &ensp; <small>({{ poll.option_one_count }} votos)</small><br> <progress value="{{poll.option_one_count}}" max="{{poll.total}}"></progress></li><br>
+            <li class="list-group-item">{{ poll.option_two }} &ensp; <small>({{ poll.option_two_count }} votos)</small><br><progress value="{{poll.option_two_count}}" max="{{poll.total}}"></progress></li><br>
+            <li class="list-group-item">{{ poll.option_three }} &ensp; <small>({{ poll.option_three_count }} votos)</small><br><progress value="{{poll.option_three_count}}" max="{{poll.total}}"></progress></li><br>
+        </ul>
+    </div>
+        <p class="poll-desc">o caecom agradece a sua participação!</p>
+        <div class="return-button">
+            <a href="{% url 'polls-all' %}"><input type="submit" class="submit-button" value="retornar"></a>
+        </div>
+</div>
+
+
+{% endblock %}

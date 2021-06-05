@@ -1,0 +1,28 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+
+<title>enquetes / cae.com</title>
+<div class="page">
+<h1 class="title"> enquetes: </h1>
+{% if not polls.all %}
+        <p class="no-polls-text">não há enquetes disponíveis</p>
+    {% else %}
+        {% for poll in polls %}
+        <div class="question-list-item">
+            <!-- nome da questão -->
+                <a href="{% url 'poll' poll.id %}">
+                    <p class="question-list-item-title">
+                        {{poll.title}}
+                    </p>
+                    <p class="question-list-item-author">
+                        criada em {{poll.created_at}}
+                    </p>
+                 </a>
+        </div>
+        {% endfor %}
+{% endif %}
+
+</div>
+
+{% endblock %}

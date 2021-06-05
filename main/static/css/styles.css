@@ -226,6 +226,16 @@ blockquote {
     margin: 20px auto 0 auto;
 }
 
+.poll-desc{
+    font-weight: 500;
+    margin: 20px auto 0 auto;
+    color: #8F91A2;
+}
+
+.poll-total{
+    margin: 20px auto 0 auto;
+}
+
 .question-body{
     margin-bottom: 6px;
     text-align: justify;
@@ -248,6 +258,12 @@ blockquote {
 
 .no-responses-text{
     color: lightgray;
+}
+
+.no-polls-text{
+    color: lightgray;
+    margin: 0 auto;
+    margin-bottom: 30px;
 }
 
 .help-me-response{
@@ -307,4 +323,71 @@ blockquote {
     padding: 4px 12px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.form-group{
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 24px;
+    border-radius: 10px;
+    text-align: left;
+    align-content: center;
+}
+
+.poll-option {
+    align-content: center;
+    display: block;
+    width: 120px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: #7d8568;
+    color: whitesmoke;
+    padding-top: 8px;
+    padding-left: 15px;
+    margin-bottom: 10px;
+    margin-left: 41%;
+}
+
+.vote-button {
+    display:block;
+    width: 120px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    color: darkslategray;
+    margin: 60px auto;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.vote-button:hover {
+    background-color: black;
+    color: whitesmoke;
+}
+
+progress {
+    border: none;
+    width: 400px;
+    height: 10px;
+    background: #CDE7B0;
+  }
+
+progress::-moz-progress-bar {
+    background: #CDE7B0;
+  }
+
+progress::-webkit-progress-value { 
+    background: #CDE7B0; 
+}
+
+.results-container{
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    margin-top: 30px;
+}
+
+.return-button{
+    margin-top: 30px;
 }

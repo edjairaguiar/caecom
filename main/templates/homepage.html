@@ -5,27 +5,56 @@
 <title>página inicial / cae.com</title>
 
 <div class="page">
+
+<h1 class="title"> enquetes recentes: </h1>
+
+{% if not polls.all %}
+        <p class="no-polls-text">não há enquetes disponíveis</p>
+    {% else %}
+        {% for poll in polls|slice:":5" %}
+        <div class="question-list-item">
+            <!-- nome da questão -->
+                <a href="{% url 'poll' poll.id %}">
+                    <p class="question-list-item-title">
+                        {{poll.title}}
+                    </p>
+                    <p class="question-list-item-author">
+                        criada em {{poll.created_at}}
+                    </p>
+                 </a>
+        </div>
+        {% endfor %}
+{% endif %}
+
+<a href="{% url 'polls-all' %}"><input type="submit" class="submit-button" value="ver todas"></a>
+<br>
 <h1 class="title"> perguntas recentes: </h1>
 
-{% for question in questions|slice:":5" %}
-<div class="question-list-item">
-    <!-- exibir questão em cima-->
-    <a href="{% url 'question' question.id %}">
 
-        <!-- nome da questão -->
-        <p class="question-list-item-title">
-            {{question.title}}
-        </p>
+{% if not questions.all %}
+        <p class="no-polls-text">não há enquetes disponíveis</p>
+    {% else %}
+    {% for question in questions|slice:":5" %}
+    <div class="question-list-item">
+        <!-- exibir questão em cima-->
+        <a href="{% url 'question' question.id %}">
+    
+            <!-- nome da questão -->
+            <p class="question-list-item-title">
+                {{question.title}}
+            </p>
+    
+            <!-- autor e disciplina -->
+            <p class="question-list-item-author">
+                pergunta feita por {{question.author.username}} em {{question.area}}
+            </p>
+            
+        </a>
+    </div>
+    
+    {% endfor %}
+{% endif %} 
 
-        <!-- autor e disciplina -->
-        <p class="question-list-item-author">
-            pergunta feita por {{question.author.username}} em {{question.area}}
-        </p>
-        
-    </a>
-</div>
-
-{% endfor %}
 
 <a href="{% url 'topics' %}"><input type="submit" class="submit-button" value="ver todas"></a>
 

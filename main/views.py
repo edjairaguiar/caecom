@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import forms, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Questao, Resposta
+from .models import Questao, Resposta, Poll
 from .forms import RegisterUserForm, LoginForm, NewQuestionForm, NewResponseForm, NewReplyForm
 # Create your views here.
 
@@ -13,8 +13,8 @@ def registerPage(request):
             form = RegisterUserForm(request.POST)
             if form.is_valid():
                 user = form.save()
-                login(request, user)
-                return redirect('index')
+                #login(request, user)
+                return redirect('login')
         except Exception as e:
             print(e)
             raise
@@ -49,7 +49,7 @@ def logoutPage(request):
     logout(request)
     return redirect('login')
 
-@login_required(login_url='register')
+@login_required(login_url='login')
 def newQuestionPage(request):
     form = NewQuestionForm()
 
@@ -60,6 +60,7 @@ def newQuestionPage(request):
                 question = form.save(commit=False)
                 question.author = request.user
                 question.save()
+                return redirect('question', question.id)
         except Exception as e:
             print(e)
             raise
@@ -69,11 +70,14 @@ def newQuestionPage(request):
 
 def homepage(request):
     questions = Questao.objects.all().order_by('-created_at')
+    polls = Poll.objects.all().order_by('-created_at')
     context = {
-        'questions': questions
+        'questions': questions,
+        'polls': polls
     }
     return render(request, 'homepage.html', context)
 
+@login_required(login_url='login')
 def topicsPage(request):
     questions = Questao.objects.all().order_by('-created_at')
     context = {
@@ -81,6 +85,15 @@ def topicsPage(request):
     }
     return render(request, 'topics.html', context)    
 
+@login_required(login_url='login')
+def allpollsPage(request):
+    polls = Poll.objects.all().order_by('-created_at')
+    context = {
+        'polls': polls
+    }
+    return render(request, 'poll-all.html', context)   
+
+@login_required(login_url='login')
 def questionPage(request, id):
     response_form = NewResponseForm()
     reply_form = NewReplyForm()
@@ -124,3 +137,32 @@ def replyPage(request):
             print(e)
             raise
     return redirect('index')
+
+@login_required(login_url='login')
+def pollPage(request, id):
+    poll = Poll.objects.get(id=id, pk=id)
+
+    if request.method == 'POST':
+        selected_option = request.POST.get('poll')
+        if selected_option == 'option1':
+            poll.option_one_count += 1;
+        elif selected_option == 'option2':
+            poll.option_two_count += 1;
+        elif selected_option == 'option3': 
+            poll.option_three_count += 1;
+        
+        poll.save()
+        return redirect('results', poll.id)
+    context = {
+        'poll': poll
+    }
+    return render(request, 'poll.html', context)
+
+@login_required(login_url='login')
+def results(request, id):
+    poll = Poll.objects.get(id=id, pk=id)
+
+    context = {
+        'poll' : poll
+    }
+    return render(request, 'results.html', context)

@@ -1,0 +1,46 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<title>{{poll.title}} / cae.com</title>
+<div class="page question-page">
+<h2 class="question-title">{{poll.title}}</h2>
+<p class="question-body">{{poll.body}}</p>
+<small class="question-author">enquete aberta em <b>{{poll.created_at}}</b></small>
+
+<div class="responses-container">
+    <h4 class="responses-container-heading">vote nessa enquete:</h4>
+
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="radio">
+                <label>
+                <div class="poll-option">
+                    <input type="radio" name="poll" value="option1">
+                    {{ poll.option_one }}
+                </label> &nbsp;
+                </div>
+
+                <div class="poll-option">
+                <label>
+                    <input type="radio" name="poll" value="option2">
+                    {{ poll.option_two }}
+                </label>&nbsp;
+                </div>
+
+                <div class="poll-option">
+                <label>
+                    <input type="radio" name="poll" value="option3">
+                    {{ poll.option_three }}
+                </label> &nbsp;
+                </div>
+            </div>
+            <input type="submit" value="votar" class="vote-button"/><br>
+        </div>
+    </form>
+</div>
+
+
+
+{% endblock %}
