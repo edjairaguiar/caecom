@@ -2,12 +2,9 @@ html,
 
 .name {
     position:relative;
-    display: block;
-    width: 50%;
+    height: 100px;
     margin: 0 auto;
-    height:100px;
     padding: 20px;
-    flex: auto;
 }
 
 body {
@@ -16,20 +13,20 @@ body {
 }
 
 .logo-pb {
-    display: block;
-    align-items: center;
-    position:absolute;
-    left: 0;
-    right: 0;
+    max-width: 25%;
+    position: absolute;
+    left: 37%;
+    right: 37%;
+    margin: 0 auto;
     opacity: 100%;
 }
 
 .logo-c {
-    display: block;
-    align-items: center;
-    position:absolute;
-    left: 0;
-    right: 0;
+    max-width: 25%;
+    position: absolute;
+    left: 37%;
+    right: 37%;
+    margin: 0 auto;
     opacity: 0%;
     cursor: pointer;
     transition: all 1s;

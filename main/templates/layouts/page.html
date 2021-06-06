@@ -7,21 +7,19 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}?{% now 'U' %}"/>
         <script src="{% static 'js/main.js' %}?{% now 'U' %}"></script>
 
-        <link rel="shortcut icon" href="{%  static 'images/favicon.ico' %}">
+        <link rel="shortcut icon" href="{%  static 'images/favicon.ico' %}"/>
 
-
-    </head>
-
-    <body>
-    
         <div class="name">
             <img src = "{% static 'images/logopb.png' %}" class="logo-pb" />
             <a href="{% url 'index' %}">
                 <img src = "{% static 'images/logo.png' %}" class="logo-c" />
             </a>
         </div>
-        
 
+
+    </head>
+
+    <body>
         <div class="main">
         {% include 'navbar.html' %}
         {% block content %}
